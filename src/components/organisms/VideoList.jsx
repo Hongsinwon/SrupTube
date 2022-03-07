@@ -1,27 +1,55 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const VideoList = ({ searchVideo }) => {
+const VideoList = ({ searchVideo, hotVideo }) => {
   return (
     <VideoListWrap>
+      {searchVideo.length === 0 && (
+        <List>
+          {hotVideo.map(({ id, snippet }) => (
+            <Link to={`/detail/${id}`} key={id}>
+              <Item>
+                <img
+                  src={snippet.thumbnails.medium.url}
+                  alt="썸네일"
+                  className="thumbnail"
+                />
+                <ItemGuide>
+                  <div className="guide">
+                    <h3>{snippet.title}</h3>
+                    <p>
+                      {snippet.channelTitle} |{" "}
+                      {snippet.publishedAt.substring(0, 10)}
+                    </p>
+                  </div>
+                </ItemGuide>
+              </Item>
+            </Link>
+          ))}
+        </List>
+      )}
+
       <List>
-        {searchVideo.map(({ snippet }, id) => (
-          <Item key={id}>
-            <img
-              src={snippet.thumbnails.medium.url}
-              alt="썸네일"
-              className="thumbnail"
-            />
-            <ItemGuide>
-              <div className="guide">
-                <h3>{snippet.title}</h3>
-                <p>
-                  {snippet.channelTitle} |{" "}
-                  {snippet.publishTime.substring(0, 10)}
-                </p>
-              </div>
-            </ItemGuide>
-          </Item>
+        {searchVideo.map(({ id, snippet }) => (
+          <Link to={`/detail/${id.videoId}`} key={id.videoId}>
+            <Item>
+              <img
+                src={snippet.thumbnails.medium.url}
+                alt="썸네일"
+                className="thumbnail"
+              />
+              <ItemGuide>
+                <div className="guide">
+                  <h3>{snippet.title}</h3>
+                  <p>
+                    {snippet.channelTitle} |{" "}
+                    {snippet.publishTime.substring(0, 10)}
+                  </p>
+                </div>
+              </ItemGuide>
+            </Item>
+          </Link>
         ))}
       </List>
     </VideoListWrap>

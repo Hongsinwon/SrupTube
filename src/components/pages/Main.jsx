@@ -1,14 +1,13 @@
 import React from "react";
-import { SideNav, VideoList, DetailMovieList } from "../organisms/index";
+import { SideNav, VideoList } from "../organisms/index";
 
 import styled from "styled-components";
 
-const Main = ({ searchVideo }) => {
+const Main = ({ searchVideo, hotVideo }) => {
   return (
     <MainWrap>
       <SideNav />
-      <DetailMovieList />
-      <VideoList searchVideo={searchVideo} />
+      <VideoList searchVideo={searchVideo} hotVideo={hotVideo} />
     </MainWrap>
   );
 };

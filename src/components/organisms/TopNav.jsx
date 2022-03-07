@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SideNavFull } from ".";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,13 +16,6 @@ import styled from "styled-components";
 
 const TopNav = ({ setVideo }) => {
   const [search, setSearch] = useState("");
-  const navigate = useNavigate();
-
-  //메인화면 이동 / 리렌더링
-  const clickNavigate = () => {
-    navigate("/");
-    window.location.reload();
-  };
 
   const [drop, setDrop] = useState(false);
 
@@ -37,8 +30,12 @@ const TopNav = ({ setVideo }) => {
     const params = {
       q: search,
     };
-    const result = await getVideoSearch(params);
-    setVideo(result);
+    const data = await getVideoSearch(params);
+    setVideo(data);
+  };
+
+  const reload = () => {
+    window.location.reload();
   };
 
   return (
@@ -49,11 +46,9 @@ const TopNav = ({ setVideo }) => {
             <FontAwesomeIcon icon={faBars} />
           </button>
           {drop && <SideNavFull handleDrop={handleDrop} state={drop} />}
-          <img
-            src={require("../../img/logo.jpg")}
-            alt="Seup tube 로고"
-            onClick={clickNavigate}
-          />
+          <Link to="/" onClick={reload}>
+            <img src={require("../../img/logo.jpg")} alt="Seup tube 로고" />
+          </Link>
         </NavLogo>
         <NavSearch onSubmit={SearchBtn}>
           <input
@@ -114,7 +109,6 @@ const NavLogo = styled.div`
   img {
     padding: 16px 0;
     height: 25px;
-    cursor: pointer;
   }
 `;
 const NavSearch = styled.form`

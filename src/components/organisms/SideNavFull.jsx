@@ -31,9 +31,10 @@ const SideNavFull = ({ handleDrop, state }) => {
   };
 
   //메인화면 이동 / 리렌더링
-  const clickNavigate = () => {
+  const clickReload = () => {
     navigate("/");
     window.location.reload();
+    clickDrop();
   };
 
   return (
@@ -47,12 +48,12 @@ const SideNavFull = ({ handleDrop, state }) => {
           <img
             src={require("../../img/logo.jpg")}
             alt="Seup tube 로고"
-            onClick={clickNavigate}
+            onClick={clickReload}
           />
         </SideNavFullHearder>
         <SideNavFullList>
           <ul>
-            <li onClick={clickNavigate}>
+            <li onClick={clickReload}>
               <FontAwesomeIcon icon={faHouse} />
               <p>홈</p>
             </li>
