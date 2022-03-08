@@ -11,10 +11,10 @@ function App() {
   const [hotVideo, setHotVideo] = useState([]); //인기리스트
 
   useEffect(() => {
-    most();
+    getHotVideo();
   }, []);
 
-  const most = async () => {
+  const getHotVideo = async () => {
     const result = await getVideoList();
     setHotVideo(result);
   };

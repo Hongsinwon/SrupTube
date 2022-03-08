@@ -47,6 +47,10 @@ const SideNavWrap = styled.div`
   width: 55px;
   background: #fff;
   border: 1px solid #eee;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 const SideNavlist = styled.ul`
   padding-top: 10px;
@@ -57,7 +61,7 @@ const SideNavlist = styled.ul`
     text-align: center;
     cursor: pointer;
     color: #555;
-    transition: all 0.3s;
+    transition: all 0.3s
 
     svg {
       margin-top: 14px;

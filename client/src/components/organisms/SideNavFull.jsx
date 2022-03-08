@@ -11,13 +11,9 @@ import {
   faCirclePlay,
   faClock,
   faGear,
-  faClipboardList,
-  faFlag,
-  faHeadset,
-  faCommentDots,
 } from "@fortawesome/free-solid-svg-icons";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const SideNavFull = ({ handleDrop, state }) => {
   const [dropSet, setDropSet] = useState(state);
@@ -33,14 +29,13 @@ const SideNavFull = ({ handleDrop, state }) => {
   //메인화면 이동 / 리렌더링
   const clickReload = () => {
     navigate("/");
-    window.location.reload();
     clickDrop();
   };
 
   return (
-    <div>
+    <>
       <Backdrop onClick={clickDrop} />
-      <SideNavFullWrap>
+      <SideNavFullWrap className={dropSet && "slide"}>
         <SideNavFullHearder>
           <button onClick={clickDrop}>
             <FontAwesomeIcon icon={faBars} />
@@ -91,39 +86,34 @@ const SideNavFull = ({ handleDrop, state }) => {
               <FontAwesomeIcon icon={faGear} />
               <p>설정</p>
             </li>
-            <li>
-              <FontAwesomeIcon icon={faClipboardList} />
-              <p>이용약관</p>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faFlag} />
-              <p>신고</p>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faHeadset} />
-              <p>고객센터</p>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faCommentDots} />
-              <p>의견 보내기</p>
-            </li>
           </ul>
         </SideNavFullList>
       </SideNavFullWrap>
-    </div>
+    </>
   );
 };
 
+const slideSideNavFull = keyframes`
+  from {
+    left: -240px;
+  } 
+  to {
+    left: -0px;
+  }
+`;
+
 const SideNavFullWrap = styled.div`
   position: fixed;
-  left: 0;
   width: 240px;
+  left: 0;
   height: 100vh;
   background: #fff;
   border-right: 1px solid #eee;
   z-index: 1;
   box-sizing: border-box;
+  animation: ${slideSideNavFull} 0.5s;
 `;
+
 const SideNavFullHearder = styled.div`
   display: flex;
   height: 55px;

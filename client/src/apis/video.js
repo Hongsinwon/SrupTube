@@ -3,7 +3,7 @@ import { youtube } from "./youtube";
 export const getVideoList = async () => {
   const {
     data: { items: videos },
-  } = await youtube.get("videos", {
+  } = await youtube.get("/videos", {
     params: {
       part: "snippet",
       chart: "mostPopular",
@@ -17,7 +17,7 @@ export const getVideoList = async () => {
 export const getVideoSearch = async (params) => {
   const {
     data: { items: videos },
-  } = await youtube.get("search", {
+  } = await youtube.get("/search", {
     params: {
       part: "snippet",
       maxResults: 20,

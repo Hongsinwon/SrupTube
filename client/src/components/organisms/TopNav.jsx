@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SideNavFull } from ".";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,6 +18,7 @@ const TopNav = ({ setVideo }) => {
   const [search, setSearch] = useState("");
 
   const [drop, setDrop] = useState(false);
+  const navigate = useNavigate();
 
   const handleDrop = ({ state }) => {
     setDrop(state);
@@ -32,10 +33,13 @@ const TopNav = ({ setVideo }) => {
     };
     const data = await getVideoSearch(params);
     setVideo(data);
+    navigate("/");
   };
 
   const reload = () => {
-    window.location.reload();
+    navigate("/");
+    setSearch("");
+    setVideo([]);
   };
 
   return (
@@ -46,9 +50,12 @@ const TopNav = ({ setVideo }) => {
             <FontAwesomeIcon icon={faBars} />
           </button>
           {drop && <SideNavFull handleDrop={handleDrop} state={drop} />}
-          <Link to="/" onClick={reload}>
-            <img src={require("../../img/logo.jpg")} alt="Seup tube 로고" />
-          </Link>
+
+          <img
+            onClick={reload}
+            src={require("../../img/logo.jpg")}
+            alt="Seup tube 로고"
+          />
         </NavLogo>
         <NavSearch onSubmit={SearchBtn}>
           <input
@@ -105,10 +112,23 @@ const NavLogo = styled.div`
     text-align: center;
     background-color: #fff;
     margin-right: 20px;
+
+    @media (max-width: 600px) {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 480px) {
+      width: 35px;
+    }
   }
   img {
     padding: 16px 0;
     height: 25px;
+    cursor: pointer;
+    @media (max-width: 480px) {
+      padding: 18px 0;
+      height: 20px;
+    }
   }
 `;
 const NavSearch = styled.form`
@@ -121,6 +141,10 @@ const NavSearch = styled.form`
     border: 1px solid #ddd;
     background: #f9f9f9;
 
+    @media (max-width: 600px) {
+      width: 200px;
+    }
+
     &:active,
     &:focus {
       outline: none;
@@ -132,6 +156,11 @@ const NavSearch = styled.form`
     width: 50px;
     border: 1px solid red;
     background-color: red;
+
+    @media (max-width: 480px) {
+      display: none;
+    }
+
     svg {
       color: #fff;
     }
@@ -139,6 +168,10 @@ const NavSearch = styled.form`
 `;
 const NavList = styled.ul`
   display: flex;
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 
   li {
     width: 55px;

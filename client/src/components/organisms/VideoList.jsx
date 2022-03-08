@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 
 const VideoList = ({ searchVideo, hotVideo }) => {
@@ -58,11 +59,15 @@ const VideoList = ({ searchVideo, hotVideo }) => {
 
 const VideoListWrap = styled.div`
   padding-top: 20px;
-  padding-left: 100px;
+  padding-left: 95px;
   width: 100%;
+  @media (max-width: 480px) {
+    padding-left: 20px;
+  }
 `;
 const List = styled.ul`
-  max-width: 93vw;
+  max-width: 94vw;
+  padding-right: 20px;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -72,6 +77,15 @@ const List = styled.ul`
   grid-row-gap: 20px;
   row-gap: 20px;
   margin-right: 30px;
+  box-sizing: border-box;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 const Item = styled.li`
   .thumbnail {
@@ -80,7 +94,7 @@ const Item = styled.li`
   }
 `;
 const ItemGuide = styled.div`
-  padding: 10px;
+  padding-top: 10px;
   display: flex;
 
   .guide {
