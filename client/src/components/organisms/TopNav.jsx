@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SideNavFull } from ".";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,31 +15,33 @@ import { getVideoSearch } from "../../apis/video";
 import styled from "styled-components";
 
 const TopNav = ({ setVideo }) => {
-  const [search, setSearch] = useState("");
-
-  const [drop, setDrop] = useState(false);
+  const [search, setSearch] = useState(""); //input Text
+  const [drop, setDrop] = useState(false); //dorp창
   const navigate = useNavigate();
 
-  const handleDrop = ({ state }) => {
-    setDrop(state);
-  };
-
+  //검색리스트 출력 API
   const SearchBtn = async (e) => {
-    if (!search) return;
-
     e.preventDefault();
+    if (!search) return; //search에 빈배열이면 리턴
+    // 검색어 입력
     const params = {
       q: search,
     };
     const data = await getVideoSearch(params);
-    setVideo(data);
+    setVideo(data); //app.js props 전달 state{searchVideo}
     navigate("/");
   };
 
+  //logo click relode
   const reload = () => {
     navigate("/");
     setSearch("");
     setVideo([]);
+  };
+
+  //dorp창 on/off
+  const handleDrop = ({ state }) => {
+    setDrop(state);
   };
 
   return (
@@ -53,7 +55,7 @@ const TopNav = ({ setVideo }) => {
 
           <img
             onClick={reload}
-            src={require("../../img/logo.jpg")}
+            src={require("../../img/logo.png")}
             alt="Seup tube 로고"
           />
         </NavLogo>
@@ -111,7 +113,7 @@ const NavLogo = styled.div`
     font-size: 24px;
     text-align: center;
     background-color: #fff;
-    margin-right: 20px;
+    margin-right: 10px;
 
     @media (max-width: 600px) {
       margin-right: 10px;
@@ -142,7 +144,7 @@ const NavSearch = styled.form`
     background: #f9f9f9;
 
     @media (max-width: 600px) {
-      width: 200px;
+      width: 180px;
     }
 
     &:active,

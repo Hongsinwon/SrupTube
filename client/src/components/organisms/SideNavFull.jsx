@@ -15,6 +15,7 @@ import {
 
 import styled, { keyframes } from "styled-components";
 
+//handleDrop - drop on/off / state => fales
 const SideNavFull = ({ handleDrop, state }) => {
   const [dropSet, setDropSet] = useState(state);
 
@@ -41,7 +42,7 @@ const SideNavFull = ({ handleDrop, state }) => {
             <FontAwesomeIcon icon={faBars} />
           </button>
           <img
-            src={require("../../img/logo.jpg")}
+            src={require("../../img/logo.png")}
             alt="Seup tube 로고"
             onClick={clickReload}
           />
