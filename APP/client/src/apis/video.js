@@ -12,12 +12,13 @@ export const getVideoList = async () => {
   return data;
 };
 
+//q: params.q + "",
 export const getVideoSearch = async (params) => {
   const { data } = await youtube.get("/search", {
     params: {
       part: "snippet",
       maxResults: 20,
-      q: params.q + "",
+      q: params,
       type: "video",
     },
   });

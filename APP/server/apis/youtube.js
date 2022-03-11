@@ -14,6 +14,7 @@ export const getVideoList = async () => {
   return videos;
 };
 
+//q: params.q + "",
 export const getVideoSearch = async (params) => {
   const {
     data: { items: videos },
