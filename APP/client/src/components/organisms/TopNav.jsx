@@ -55,8 +55,8 @@ const TopNav = ({ setVideo }) => {
 
           <img
             onClick={reload}
-            src={require("../../img/logo.png")}
-            alt="Seup tube 로고"
+            src={process.env.PUBLIC_URL + `/img/logo.png`}
+            alt="Seuptube 로고"
           />
         </NavLogo>
         <NavSearch onSubmit={SearchBtn}>
