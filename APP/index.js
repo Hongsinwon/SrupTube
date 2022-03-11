@@ -27,6 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 // router
 app.use("/", youtubeRouter);
 
+//ejs 엔진 설정
+app.set("view engine", "ejs");
+app.engine("html", require("ejs").renderFile);
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
