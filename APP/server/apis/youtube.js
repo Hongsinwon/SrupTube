@@ -14,18 +14,17 @@ export const getVideoList = async () => {
   return videos;
 };
 
-// part: "snippet",
-// maxResults: 20,
-// q: params.q + "",
-// type: "video",
-export const getVideoSearch = async (params) => {
-  const {
-    data: { items: videos },
-  } = await youtubeInstance.get("/search", {
-    params: {
-      params,
-    },
-  });
+// export const getVideoSearch = async (params) => {
+//   const {
+//     data: { items: videos },
+//   } = await youtubeInstance.get("/search", {
+//     params: {
+//       part: "snippet",
+//       maxResults: 20,
+//       q: params.q + "",
+//       type: "video",
+//     },
+//   });
 
   return videos;
 };

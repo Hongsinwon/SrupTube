@@ -16,10 +16,10 @@ router.get("/videos", async function (req, res, next) {
 });
 
 // 검색 동영상 20개 router
-router.get("/search", async function (req, res, next) {
-  const result = await getVideoSearch(req.query);
-  res.header("Access-Control-Allow-Origin", "https://sruptube.herokuapp.com/");
-  res.send(result);
-});
+// router.get("/search", async function (req, res, next) {
+//   const result = await getVideoSearch(req.query);
+//   res.header("Access-Control-Allow-Origin", "https://sruptube.herokuapp.com/");
+//   res.send(result);
+// });
 
 export default router;
