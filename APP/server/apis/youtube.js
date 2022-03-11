@@ -22,7 +22,7 @@ export const getVideoSearch = async (params) => {
     params: {
       part: "snippet",
       maxResults: 20,
-      q: params.q + "",
+      q: params,
       type: "video",
     },
   });
