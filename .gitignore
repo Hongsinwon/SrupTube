@@ -1,0 +1,7 @@
+/APP/package-lock.json
+
+/APP/server/node_modules
+
+/APP/client/node_modules
+/APP/client/build
+/APP/client/package-lock.json

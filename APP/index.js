@@ -8,7 +8,7 @@ import youtubeRouter from "./server/routes/youtube.js";
 const app = express();
 
 const __dirname = path.resolve();
-const port = process.env.PORT || "8080";
+const port = process.env.PORT || 8080;
 
 //cors 설정
 const corsOptions = {
