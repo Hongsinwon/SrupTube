@@ -39,6 +39,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+//포트연결
 app.listen(port, () => {
   console.log("Express server listening on port %d in %s mode");
 });
