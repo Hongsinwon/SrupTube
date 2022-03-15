@@ -29,104 +29,58 @@
 
 </br>
 
-## 1. 문제이슈 [cors] - https://youtu.be/bW31xiNB8Nc
-> 교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제이다. - MDN
+## 1. 문제이슈 [node / Express] 템플릿과 html 관한 오류 
+
 > 
-> 여기서 origin(출처) 이란 scheme(protocol), host(domain), port 로 구성된다.
+> [에러코드] 
+> Error: No default engine was specified and no extension was provided
 > 
-> protocol은 https:// Host는 www.google.com Port는 :443 이며, 동일 출처(Same Origin)란 scheme, host, port 가 모두 같을때를 말한다.
-> 
-> 또한 SOP(Same-Origin Policy)이란 같은 출처에서만 리소스를 공유할 수 있다는 규칙이다. 브라우저에서 다른 서버에서 요청할 경우에 해당되고, 브라우저를 거치지 않고 서버 간 통신을 할 때는 이 정책이 적용되지 않는다.
-> 
-> 그런데 이런 정책이 왜 존재할까? 만약 다른 출처의 어플리케이션이 서로 통신하는 것에 대해 아무런 제약도 존재하지 않는다면 악의를 가진 사용자가 소스 코드를 보고 CSRF(Cross-Site Request Forgery) 나 XSS(Cross-Site Scripting) 와 같은 방법을 사용하여 정보를 탈취할 수 있다.
-> 
-> CORS는 다른 출처의 리소스가 필요한 경우,  SOP를 우회하기 위한 여러가지 방법 중 가장 권장되는 방법이다.
+
+
+node.js express로 html file을 로드할때 에러가 발생하는 현상이었다. 
+이에대하여 스택오버플로우와 검색을 통해 쉽게 해결할 수 있는 방법은 2가지 정도라고 생각되었다.
+이미 view파일에 ejs를 이용하여 템플릿을 만들어두었던 상태이기때문에 탬플릿으로 화면엔진을 설정해주었다
 
 </br>
 
-cors 오류해결에 도움을 주었던 블로그 - https://xiubindev.tistory.com/115
+> 
+> [해결방법] 
+> 1.EJS(탬플릿)으로 엔진 설정하기   2.sendFile로 html파일을 뿌리기
+> 
+
+
+
+</br>
+
+cors 오류해결에 도움을 주었던 사이트 
+1. https://codingsquirrel.tistory.com/33
+2. https://stackoverflow.com/questions/25270434/nodejs-how-to-render-static-html-with-express-4
 
 </br> 
 
-1. client/src/apis/index.js
+1. 설치
  ```javascript
-    import axios from "axios";
-
-    const instance = axios.create({
-     baseURL: "https://search-reactapp.herokuapp.com/", //heroku주소로 변경
-      headers: {
-       "X-Naver-Client-Id": "Client-Id를 넣어주세요",
-       "X-Naver-Client-Secret": "Client-Secret를 넣어주세요",
-      },
-    });
-
-    export { instance };
+    npm install html
  ```
  
  </br> 
  
- 2. server/router/index.js :: 서버 : Access-Control-Allow-Origin 헤더 세팅하기
+ 2. APP/index.js
  ```javascript
-    //영화리스트
-    router.get("/movie", async function (req, res, next) {
-      const result = await getMovieList(req.query);
-      res.header(
-        "Access-Control-Allow-Origin",
-        "https://search-reactapp.herokuapp.com/"
-      );
-      res.send(result);
-    });
-    
-    //책리스트
-    router.get("/book", async function (req, res, next) {
-      const result = await getBookList(req.query);
-      res.header(
-        "Access-Control-Allow-Origin",
-        "https://search-reactapp.herokuapp.com/"
-      );
-      res.send(result);
-    });
-
-    //책 상세페
-    router.get("/book/:isbn", async function (req, res, next) {
-      const { isbn } = req.params;
-      const params = {
-       d_isbn: isbn,
-      };
-      const result = await getBookDetail(params);
-     res.header(
-       "Access-Control-Allow-Origin",
-       "https://search-reactapp.herokuapp.com/"
-       );
-      res.send(result);
-    });
-
- ```
- 
-2. server/router/index.js 추가한 내용
- 
-  ```javascript
-     res.header(
-       "Access-Control-Allow-Origin",
-       "https://search-reactapp.herokuapp.com/"
-       );
- ```
- 
- </br> 
-
-3. app.js  :: 서버 : CORS 미들웨어 사용하기
-  ```javascript
-    const app = express();
-
     const __dirname = path.resolve();
-    const port = process.env.PORT || "8080";
-
-    const corsOptions = {
-     origin: "https://search-reactapp.herokuapp.com/",
-      credentials: true,
-    };
-    app.use(cors(corsOptions));
+    
+    // build파일 불러오기 //__dirname => 현재 경로
+    app.use(express.static(path.join(__dirname, "./client/build"))); 
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    
+    //sendFile로 html파일을 뿌리기
+    app.get("*", (req, res) => {
+     res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    });
  ```
+ 
+
 
 </br>
 
