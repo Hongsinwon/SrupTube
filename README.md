@@ -107,10 +107,7 @@ Mixed content 문제 오류해결에 도움을 주었던 사이트
 
 1. ./APP/client/public/index.html - html파일 head에 추가
  ```javascript
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
  ```
  
 </br>
@@ -121,16 +118,14 @@ Mixed content 문제 오류해결에 도움을 주었던 사이트
  
  ## 완성된 페이지
  
-#### 1. 메인
+#### 1. 메인 (인기 동영상 List)
 ![메인](images/main.png)
  
-#### 2. 영화 검색
-![영화 검색](images/movie.png)
+#### 2. 영상 검색
+![영상 검색](images/search.png)
   
-#### 3. 책 검색
-![책 검색](images/book.png)
+#### 3. 영상 상세페이지
+![영상 상세페이지](images/detail.png)
    
-#### 4. 책 상세페이지
-![책 상세페이지](images/detail.png)
 
 
