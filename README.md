@@ -99,8 +99,7 @@ https 사이트에서 ajax를 사용해서 비동기로 http 사이트에 reques
 </br>
 
 
-Mixed content 문제 오류해결에 도움을 주었던 사이트 
-1. https://wellsw.tistory.com/34
+Mixed content 문제 오류해결에 도움을 주었던 사이트 - https://wellsw.tistory.com/34
 
 
 </br> 
