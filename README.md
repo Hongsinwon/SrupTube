@@ -52,7 +52,7 @@ node.js express로 html file을 로드할때 에러가 발생하는 현상이었
 
 </br>
 
-cors 오류해결에 도움을 주었던 사이트 
+[node / Express] 템플릿과 html 관한 오류해결에 도움을 주었던 사이트 
 1. https://codingsquirrel.tistory.com/33
 2. https://stackoverflow.com/questions/25270434/nodejs-how-to-render-static-html-with-express-4
 
@@ -79,9 +79,40 @@ cors 오류해결에 도움을 주었던 사이트
      res.sendFile(path.join(__dirname, "./client/build/index.html"));
     });
  ```
+
+</br>
+
+
+## 2. 문제이슈 [Mixed content 문제 해결]
+
+> 
+> [에러코드] </br>
+> Error: Mixed Content: The page at 'https://plprice.netlify.app/' was loaded over HTTPS, but requested an insecure script </br>
+>'http://api.vworld.kr/req/searchservice=search&version=2.0&request=search&format=json&type=ADDRESS&category=PARCEL&query=%EB%B4%8>  
+> 9%EB%82%A8%EB%A6%AC%20720-9&callback=jQuery351016469620631517623_1610625986322&_=1610625986323'. 
+> This request has been blocked; the content must be served over HTTPS.
+> 
+
+
+https 사이트에서 ajax를 사용해서 비동기로 http 사이트에 request를 요청해서 문제가 발생 했습니다. 암호화된 HTTPS 기반의 사이트에서 암호화되지 않은 HTTP 사이트에 요청을 보내서 Mixed content 에러가 발생한 것입니다.
+
+</br>
+
+
+Mixed content 문제 오류해결에 도움을 주었던 사이트 
+1. https://wellsw.tistory.com/34
+
+
+</br> 
+
+1. ./APP/client/public/index.html - html파일 head에 추가
+ ```javascript
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+ ```
  
-
-
 </br>
 
 --------------------------------------------
