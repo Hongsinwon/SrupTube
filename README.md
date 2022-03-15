@@ -1,7 +1,7 @@
-<b>[넵플러스 프로젝트] 2022.1.10 ~ 2022.2.23
+<b>[개인 프로젝트] 2022.3.01 ~ 2022.3.15
 
 
-  <h1> 네이버 API을 활용한 영화 & 책검색 프로젝트 - MOVE </br> https://search-reactapp.herokuapp.com/</h1>
+  <h1> 유튜브 API을 활용한 프로젝트 - SrupTube </br> https://sruptube.herokuapp.com/</h1>
   
 ## 주요 기능 
   1. 네이버 Api를 이용한 영화 & 책 검색 리스트 출력
