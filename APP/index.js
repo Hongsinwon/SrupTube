@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+
 import cors from "cors";
 
 //router 불러오기
@@ -8,7 +9,7 @@ import youtubeRouter from "./server/routes/youtube.js";
 const app = express();
 
 const __dirname = path.resolve();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || "8080";
 
 //cors 설정
 const corsOptions = {
@@ -27,21 +28,11 @@ app.use(express.urlencoded({ extended: true }));
 // router
 app.use("/", youtubeRouter);
 
-//ejs 엔진 설정
-app.set("view engine", "ejs");
-app.engine("html", require("ejs").renderFile);
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 //포트연결
-app.listen(port, () => {
+app.listen(port, function () {
   console.log("Express server listening on port %d in %s mode");
 });
-
-export default app;
